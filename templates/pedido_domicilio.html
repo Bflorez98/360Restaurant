@@ -14,35 +14,56 @@
   </header>
 
   <main class="direccion-container">
-    <form action="{{ url_for('pedido_domicilio') }}" method="POST" class="direccion-form">
-      <label for="via">Tipo de vía (Calle / Carrera / Avenida):</label>
-      <input type="text" id="via" name="via" required placeholder="Ej: Calle, Carrera, Avenida">
 
-      <label for="numero">Número:</label>
-      <input type="text" id="numero" name="numero" required placeholder="Ej: 23 # 45-67">
+  {% if direccion_guardada %}
+  <!-- OPCIÓN DE USAR LA DIRECCIÓN GUARDADA -->
+  <div class="direccion-guardada-box">
+      <h3>Dirección guardada:</h3>
+      <p>{{ direccion_guardada }}</p>
 
-      <label for="barrio">Barrio:</label>
-      <input type="text" id="barrio" name="barrio" required placeholder="Ej: Modelia">
+      <form action="{{ url_for('pedido_domicilio') }}" method="POST">
+          <input type="hidden" name="usar_guardada" value="si">
+          <button class="btn-confirmar" type="submit">Usar esta dirección</button>
+      </form>
 
-      <label for="localidad">Localidad:</label>
-      <input type="text" id="localidad" name="localidad" required placeholder="Ej: Fontibón">
+      <hr>
+      <p>¿Deseas ingresar una dirección diferente?</p>
+  </div>
+  {% endif %}
 
-      <label for="ciudad">Ciudad:</label>
-      <input type="text" id="ciudad" name="ciudad" required placeholder="Ej: Bogotá">
+  <!-- FORMULARIO PARA NUEVA DIRECCIÓN -->
+  <form action="{{ url_for('pedido_domicilio') }}" method="POST" class="direccion-form">
 
-      <button type="submit" class="btn-confirmar">Guardar Dirección</button>
-    </form>
+    <label for="via">Tipo de vía:</label>
+    <input type="text" id="via" name="via" required placeholder="Ej: Calle, Carrera, Avenida">
 
-    {% with messages = get_flashed_messages(with_categories=true) %}
-      {% if messages %}
-        <ul class="flashes">
-          {% for category, message in messages %}
-            <li class="{{ category }}">{{ message }}</li>
-          {% endfor %}
-        </ul>
-      {% endif %}
-    {% endwith %}
-  </main>
+    <label for="numero">Número:</label>
+    <input type="text" id="numero" name="numero" required placeholder="Ej: 23 # 45-67">
+
+    <label for="barrio">Barrio:</label>
+    <input type="text" id="barrio" name="barrio" required placeholder="Ej: Modelia">
+
+    <label for="localidad">Localidad:</label>
+    <select id="localidad" name="localidad" required>
+      <option value="">Selecciona una localidad</option>
+      <option value="Fontibón">Fontibón</option>
+    </select>
+
+    <label for="ciudad">Ciudad:</label>
+    <select id="ciudad" name="ciudad" required>
+      <option value="">Selecciona ciudad</option>
+      <option value="Bogotá">Bogotá</option>
+    </select>
+
+    <!-- Checkbox para guardar la nueva dirección -->
+    <label class="guardar-check">
+      <input type="checkbox" name="guardar_direccion" value="si">
+      Guardar esta dirección para futuros pedidos
+    </label>
+
+    <button type="submit" class="btn-confirmar">Guardar Dirección</button>
+  </form>
+</main>
 
   <footer class="site-footer">
     <p>&copy; 2025 Restaurante 360</p>

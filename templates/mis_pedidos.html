@@ -4,67 +4,68 @@
 
 {% block content %}
 
-  <link rel="stylesheet" href="/static/CSS/stylemispedidos.css">
+<link rel="stylesheet" href="/static/CSS/stylemispedidos.css">
 
-  <main class="pedidos-container">
-    <h2 class="titulo-centro">Pedidos en Curso</h2>
-    {% if pedidos_curso %}
-    <table class="tabla-pedidos bonita">
-      <thead>
-        <tr>
-          <th>ID Pedido</th>
-          <th>Fecha</th>
-          <th>Total</th>
-          <th>Estado</th>
-        </tr>
-      </thead>
-      <tbody>
-        {% for pedido in pedidos_curso %}
-        <tr>
-          <td>#{{ pedido.id_pedido }}</td>
-          <td>{{ pedido.fecha_pedido }}</td>
-          <td>${{ pedido.total | int }}</td>
-          <td>
-            <span class="badge {{ pedido.estado|lower|replace(' ', '_') }}">
-              {{ pedido.estado }}
-            </span>
-          </td>
-        </tr>
-        {% endfor %}
-      </tbody>
-    </table>
-    {% else %}
-      <p class="no-pedidos">No tienes pedidos en curso.</p>
-    {% endif %}
+<main class="pedidos-container">
+  <h2 class="titulo-centro">Pedidos en Curso</h2>
+  {% if pedidos_curso %}
+  <table class="tabla-pedidos bonita">
+    <thead>
+      <tr>
+        <th>ID Pedido</th>
+        <th>Fecha</th>
+        <th>Total</th>
+        <th>Estado</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for pedido in pedidos_curso %}
+      <tr>
+        <td>#{{ pedido.id_pedido }}</td>
+        <td>{{ pedido.fecha_pedido }}</td>
+        <td>${{ pedido.total | int }}</td>
+        <td>
+          <span class="badge {{ pedido.estado|lower|replace(' ', '_') }}">
+            {{ pedido.estado }}
+          </span>
+        </td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+  {% else %}
+  <p class="no-pedidos">No tienes pedidos en curso.</p>
+  {% endif %}
 
-    <h2 class="titulo-centro">Pedidos Finalizados</h2>
-    {% if pedidos_finalizados %}
-    <table class="tabla-pedidos bonita">
-      <thead>
-        <tr>
-          <th>ID Pedido</th>
-          <th>Fecha</th>
-          <th>Total</th>
-          <th>Estado</th>
-        </tr>
-      </thead>
-      <tbody>
-        {% for pedido in pedidos_finalizados %}
-        <tr>
-          <td>#{{ pedido.id_pedido }}</td>
-          <td>{{ pedido.fecha_pedido }}</td>
-          <td>${{ pedido.total }}</td>
-          <td>
-            <span class="badge {{ pedido.estado|lower }}">
-              {{ pedido.estado }}
-            </span>
-          </td>
-        </tr>
-        {% endfor %}
-      </tbody>
-    </table>
-    {% else %}
-      <p class="no-pedidos">No tienes pedidos finalizados.</p>
-    {% endif %}
-  </main>
+  <h2 class="titulo-centro">Pedidos Finalizados</h2>
+  {% if pedidos_finalizados %}
+  <table class="tabla-pedidos bonita">
+    <thead>
+      <tr>
+        <th>ID Pedido</th>
+        <th>Fecha</th>
+        <th>Total</th>
+        <th>Estado</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for pedido in pedidos_finalizados %}
+      <tr>
+        <td>#{{ pedido.id_pedido }}</td>
+        <td>{{ pedido.fecha_pedido }}</td>
+        <td>${{ pedido.total }}</td>
+        <td>
+          <span class="badge {{ pedido.estado|lower }}">
+            {{ pedido.estado }}
+          </span>
+        </td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+  {% else %}
+  <p class="no-pedidos">No tienes pedidos finalizados.</p>
+  {% endif %}
+</main>
+
 {% endblock %}

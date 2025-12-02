@@ -17,17 +17,18 @@
     <nav class="main-nav">
         <a href="/inicio">Inicio</a>
         <a href="/mesas">Mesas</a>
-        <a href="/mis_pedidos">Pedidos</a>
+        <a href="/mis_pedidos" id="linkPedidos">
+            Pedidos <span id="notifCountPedidos" class="badgePedidos"></span>
+        </a>
         <a href="/menu">Menú</a>
         <a href="/carrito">Carrito</a>
     </nav>
 
     <!-- Notificaciones + usuario -->
     <div class="user-actions">
-    <!-- 🔔 Campana de notificaciones (justo al lado del usuario) -->
     <div class="notification-bell" id="notificationBell">
         <i class="fas fa-bell"></i>
-        <span id="notificationCount" class="badge">0</span>
+        <span id="notificationCount" class="badge"></span>
     </div>
 
     <!-- Icono redondo del usuario -->
@@ -58,7 +59,7 @@
     <main>
         <!-- Mensaje de bienvenida -->
         <section class="welcome">
-            <h2>Brandon <br>Bienvenido al Restaurante 360</h2>
+            <h2>¡Cliente Preferencial!</h2><br><h1>Bienvenido al Restaurante 360</h1>
         </section>
 
         <!-- Opciones para pedir -->

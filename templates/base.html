@@ -8,7 +8,6 @@
     <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
 </head>
 <body>
-    <!-- Header común -->
     <header class="main-header">
         <div class="logo"></div>
         <nav class="main-nav">
@@ -19,6 +18,12 @@
             <a href="/carrito">Carrito</a>
         </nav>
         <div class="user-actions">
+            <!-- 🔔 Icono de notificación -->
+            <div class="notificacion-icon" onclick="window.location.href='/mis_pedidos'">
+                <i class="fas fa-bell"></i>
+                <span id="notificacion-badge" class="notificacion-badge">0</span>
+            </div>
+
             <div class="user-avatar" onclick="toggleMenu()"></div>
             <div id="menu-dropdown" class="dropdown-menu">
                 <a href="/logout"><i class="fas fa-sign-out-alt"></i> Cerrar sesión</a>
@@ -31,22 +36,13 @@
         </div>
     </header>
 
-    <!-- Contenido dinámico -->
     <main>
         {% block content %}{% endblock %}
     </main>
 
-    <!-- Footer común -->
     <footer class="site-footer">
         <p>&copy; 2025 Restaurante 360 | Desarrollado por Brandon Florez y Fredes Acosta</p>
     </footer>
-
-    <!-- Script del menú -->
-    <script>
-        function toggleMenu() {
-            const menu = document.getElementById("menu-dropdown");
-            menu.style.display = (menu.style.display === "block") ? "none" : "block";
-        }
-    </script>
+    <script src="/static/notificaciones.js"></script>
 </body>
 </html>

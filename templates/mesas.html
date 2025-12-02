@@ -4,30 +4,30 @@
 
 {% block content %}
 
-<link rel="stylesheet" href="/static/CSS/stylemesas.css">
+<link rel="stylesheet" href="{{ url_for('static', filename='CSS/stylemesas.css') }}">
 
-  <!-- CSS específico de esta vista -->
-  <link rel="stylesheet" href="{{ url_for('static', filename='CSS/stylemesas.css') }}">
+<h2 class="titulo-centro">Mesas Disponibles</h2>
 
-  <h2 class="titulo-centro">Mesas Disponibles</h2>
+<a href="{{ url_for('dashboard_cliente') }}" class="btn-volver">Volver al Inicio</a>
+<br><br>
 
-  <a href="{{ url_for('dashboard_cliente') }}" class="btn-volver">Volver al Inicio</a>
-  <br></br>
-  {% if mesas %}
-      <section class="mesas-grid">
-          {% for mesa in mesas %}
-              <div class="mesa-card">
-                  <h3>Mesa #{{ mesa.numero_mesa }}</h3>
-                  <p>Capacidad: {{ mesa.capacidad }} personas</p>
-                    <br></br>
-                  <form action="{{ url_for('seleccionar_mesa', mesa_id=mesa.id_mesa) }}" method="POST">
-                      <button type="submit">Reservar</button>
-                  </form>
-              </div>
-          {% endfor %}
-      </section>
-  {% else %}
-      <p class="no-mesas">No hay mesas disponibles actualmente. Puedes hacer un pedido para llevar.</p>
-      <a href="{{ url_for('pedido_domicilio') }}" class="btn-pedido">Pedir para llevar</a>
-  {% endif %}
+{% if mesas %}
+    <section class="mesas-grid">
+        {% for mesa in mesas %}
+            <div class="mesa-card">
+                <h3>Mesa #{{ mesa.numero_mesa }}</h3>
+                <p>Capacidad: {{ mesa.capacidad }} personas</p>
+                <br>
+
+                <form action="{{ url_for('seleccionar_mesa', mesa_id=mesa.id_mesa) }}" method="POST">
+                    <button type="submit" class="btn-reservar">Reservar</button>
+                </form>
+            </div>
+        {% endfor %}
+    </section>
+{% else %}
+    <p class="no-mesas">No hay mesas disponibles en este momento.</p>
+    <a href="{{ url_for('pedido_domicilio') }}" class="btn-pedido">Pedir para llevar</a>
+{% endif %}
+
 {% endblock %}

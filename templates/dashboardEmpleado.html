@@ -10,7 +10,7 @@
     <!-- Header -->
     <header class="main-header">
         <nav class="main-nav">
-            <a href="/dashboard_empleado">Pedidos Entrantes</a>
+            <a href="/dashboard_empleado" class="active">Pedidos Entrantes</a>
             <a href="/logout" class="btn-outline">Cerrar sesión</a>
         </nav>
     </header>
@@ -33,19 +33,51 @@
                     <p><strong>Mesa:</strong> {{ pedido.numero_mesa }}</p>
                 {% endif %}
 
-                <p><strong>Total:</strong> ${{ pedido.total }}</p>
                 <p><strong>Estado:</strong> {{ pedido.estado }}</p>
                 <p><strong>Hora:</strong> {{ pedido.fecha_pedido }}</p>
 
-                <form action="{{ url_for('actualizar_pedido', id_pedido=pedido.id_pedido) }}" method="POST">
+                <!-- 🧾 Detalle de productos -->
+                {% if pedido.detalle %}
+                <div class="detalle-pedido">
+                    <h4>Productos</h4>
+                    <table class="detalle-tabla">
+                        <thead>
+                            <tr>
+                                <th>Producto</th>
+                                <th>Cant.</th>
+                                <th>Precio</th>
+                                <th>Subtotal</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for item in pedido.detalle %}
+                            <tr>
+                                <td>{{ item.nombre_producto }}</td>
+                                <td>{{ item.cantidad }}</td>
+                                <td>${{ "%.2f"|format(item.precio_unitario or 0) }}</td>
+                                <td>${{ "%.2f"|format(item.subtotal or 0) }}</td>
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+
+                    <div class="total-pedido">
+                        <strong>Total Pedido:</strong> 
+                        <span>${{ pedido.total }}</span>
+                    </div>
+                </div>
+                {% endif %}
+
+                <!-- Actualizar estado -->
+                <form action="{{ url_for('actualizar_pedido', id_pedido=pedido.id_pedido) }}" method="POST" class="form-estado">
                     <label for="estado">Actualizar estado:</label>
                     <select name="estado" required>
                         <option value="Pendiente" {% if pedido.estado == "Pendiente" %}selected{% endif %}>Pendiente</option>
-                        <option value="Preparando" {% if pedido.estado == "Preparando" %}selected{% endif %}>Preparando</option>En preparación</option>
+                        <option value="Preparando" {% if pedido.estado == "Preparando" %}selected{% endif %}>Preparando</option>
                         <option value="En camino" {% if pedido.estado == "En camino" %}selected{% endif %}>En camino</option>
                         <option value="Entregado" {% if pedido.estado == "Entregado" %}selected{% endif %}>Entregado</option>
                     </select>
-                    <button type="submit">Actualizar</button>
+                    <button type="submit" class="btn-actualizar">Actualizar</button>
                 </form>
             </div>
             {% endfor %}
