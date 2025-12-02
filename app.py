@@ -22,12 +22,6 @@ app.config['MYSQL_DATABASE_HOST'] = os.environ.get('MYSQL_HOST', 'localhost')
 app.config['MYSQL_DATABASE_PORT'] = 3307
 
 
-# --- Configuración Twilio (recomiendo usar variables de entorno) ---
-TWILIO_ACCOUNT_SID = os.environ.get('TWILIO_ACCOUNT_SID', 'AC73404a73a73f5020e780adbd6f7cef3f')
-TWILIO_AUTH_TOKEN = os.environ.get('TWILIO_AUTH_TOKEN', '1fbd08eac318e714aad2ee6f6191850a')
-TWILIO_PHONE_NUMBER = os.environ.get('TWILIO_PHONE_NUMBER', '+15513684536')
-
-client = Client(TWILIO_ACCOUNT_SID, TWILIO_AUTH_TOKEN)
 
 # --- Configuración Google Maps API  ---
 GOOGLE_MAPS_API_KEY = os.getenv("GOOGLE_MAPS_API_KEY")
